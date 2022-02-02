@@ -1,0 +1,55 @@
+Git commands
+
+Git config - -global user.name “Your Name” //sets name
+Git config - -global user.email “Your email” //sets email -> same as github-email
+
+Git init //initialises a new repository within the current folder
+
+Git add FILENAME //adds files to the staging environment 
+#git add - -all
+#git add -A
+#git add .
+Git commit -m “First Commit” //commits the staged files
+
+Git log //shows all commits
+
+Git restore FILENAME
+#git restore .
+#git checkout .
+
+Git rm FILENAME //deletes file
+Git mv FILENAME NEWFILENAME //rename a file
+
+Git diff //shows difference between to states of a file
+
+Git commit -amend
+#git commit -am ‘New commit message’
+#git commit -amend - -no-edit
+
+Git reset HASH //takes a hash from “git log” and resets back to the state of that commit
+Git reset - -hard HASH //deletes everything before that hash
+
+git rebase - -interactive <branch>/<commit> //lets you move the order of commits
+#git rebase -i HEAD~# //rewind a certain amount of commits
+#git rebase -i - -root //gives all commits
+
+Git branch //shows all branches
+Git switch -c NAME //copies current branch under the new name
+#git checkout -b NAME //same but older command
+
+Git merge <branch> //merges into current branch
+Git branch - -delete NAME //deletes the specified branch
+#git branch -d NAME
+#git branch -D NAME //forces to ignore conflicts
+
+Git remote add NAME URL //NAME is often “origin”, connecting the project to GitHub
+#git remote remove NAME 
+#git rename OLDNAME NEWNAME
+#git remote -v //lists all remotes with information
+
+Git push - -all //pushes all branches to the remote location
+
+Git stash //save changes temp and revert to last commit
+#git stash list
+#git stash apply <NUMBER>//applies the set of changes
+#git stash pop //removes stash
