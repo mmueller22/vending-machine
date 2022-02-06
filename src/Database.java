@@ -1,3 +1,4 @@
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -8,15 +9,20 @@ import java.util.ArrayList;
 
 public class Database implements Serializable {
     private ArrayList<Account> list;
-    
+
     @SuppressWarnings("unchecked")
     public Database() {
         try {
-            FileInputStream fileIn = new FileInputStream("tmp/database.ser");
-            ObjectInputStream in = new ObjectInputStream(fileIn);
-            list = (ArrayList<Account>) in.readObject();
-            in.close();
-            fileIn.close();
+            if (fileAvailable()) {
+                FileInputStream fileIn = new FileInputStream("tmp/database.ser");
+                ObjectInputStream in = new ObjectInputStream(fileIn);
+                list = (ArrayList<Account>) in.readObject();
+                in.close();
+                fileIn.close();
+            } else {
+                list = new ArrayList<Account>();
+            }
+
         } catch (IOException i) {
             i.printStackTrace();
         } catch (ClassNotFoundException c) {
@@ -27,10 +33,11 @@ public class Database implements Serializable {
 
     public boolean addEntry(Account newAccount) {
         list.add(newAccount);
+        save();
         return true;
     }
 
-    public boolean save() {
+    private boolean save() {
         try {
             FileOutputStream fileOut = new FileOutputStream("tmp/database.ser");
             ObjectOutputStream out = new ObjectOutputStream(fileOut);
@@ -40,6 +47,15 @@ public class Database implements Serializable {
             return true;
         } catch (IOException i) {
             i.printStackTrace();
+            return false;
+        }
+    }
+
+    private boolean fileAvailable() {
+        File newFile = new File("tmp/database.ser");
+        if (newFile.isFile()) {
+            return true;
+        } else {
             return false;
         }
     }

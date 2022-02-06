@@ -10,7 +10,7 @@ public class GUI extends JFrame {
     private Database database;
 
     public GUI() {
-        // this.database = new Database();
+        this.database = new Database();
     }
 
     public GUI(String title, int width, int height) {
@@ -22,11 +22,7 @@ public class GUI extends JFrame {
         add(panel);
     }
 
-    private void login() {
-
-    }
-
-    private void register() {
+    private void access() {
         GUI newGUI = new GUI("register", 500, 250);
         JLabel lblInfo = new JLabel("Please Login or register");
         JButton btnLogin = new JButton("Login");
@@ -114,10 +110,10 @@ public class GUI extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 if (txtPasswordConfirm.isVisible()) {
                     if (txtPassword.getText().equals(txtPasswordConfirm.getText())) {
-                        Account account = new Account();
-                        account.setUsername(txtUsername.getText());
-                        account.setAmount(Integer.parseInt(txtPassword.getText()));
-                        database.addEntry(account);
+                        Account newAccount = new Account();
+                        newAccount.setUsername(txtUsername.getText());
+                        newAccount.setAmount(Integer.parseInt(txtPassword.getText()));
+                        database.addEntry(newAccount);
                     } else {
                         error.setVisible(true);
                         error2.setVisible(true);
@@ -131,6 +127,6 @@ public class GUI extends JFrame {
     }
 
     public static void main(String[] args) {
-        new GUI().register();
+        new GUI().access();
     }
 }
