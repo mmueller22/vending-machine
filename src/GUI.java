@@ -112,14 +112,21 @@ public class GUI extends JFrame {
                     if (txtPassword.getText().equals(txtPasswordConfirm.getText())) {
                         Account newAccount = new Account();
                         newAccount.setUsername(txtUsername.getText());
-                        newAccount.setAmount(Integer.parseInt(txtPassword.getText()));
+                        newAccount.setPassword(txtPassword.getText());
+                        //newAccount.setAmount(Integer.parseInt(txtPassword.getText()));
                         database.addEntry(newAccount);
                     } else {
                         error.setVisible(true);
                         error2.setVisible(true);
                     }
                 } else {
-                    //continue with checking if username and password are correct and so on...
+                    database.getUserList();
+                    if (database.checkUserLogin(txtUsername.getText(), txtPassword.getText())) {
+                        //continue
+                    } else {
+                        JOptionPane.showMessageDialog(panel, "username or password wrong");
+                        //add option to get back to registering
+                    }
                 }
             }
         });

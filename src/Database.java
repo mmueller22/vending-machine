@@ -59,4 +59,22 @@ public class Database implements Serializable {
             return false;
         }
     }
+
+    public boolean checkUserLogin(String username, String password){
+        for(int i = 0; i < list.size(); i++){
+            if(username.equals(list.get(i).getUsername())){
+                if(password.equals(list.get(i).getPassword())){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public void getUserList() { //experimental
+        for (int i = 0; i < list.size(); i++) {
+            System.out.println(list.get(i).getUsername());
+            System.out.println(list.get(i).getPassword());
+        }
+    }
 }
